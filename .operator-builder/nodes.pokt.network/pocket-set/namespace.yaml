@@ -1,0 +1,4 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: default # +operator-builder:field:parent=metadata.name,type=string

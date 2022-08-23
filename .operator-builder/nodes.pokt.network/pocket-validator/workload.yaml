@@ -1,0 +1,17 @@
+kind: ComponentWorkload
+name: pocket-validator
+spec:
+  api:
+    clusterScoped: true
+    domain: pokt.network
+    group: nodes
+    kind: PocketValidator
+    version: v1alpha1
+  companionCliSubcmd:
+    description: Manage v1 pocket validator nodes
+    name: validators
+  dependencies: []
+  resources:
+    - database.yaml
+    - validator.yaml
+

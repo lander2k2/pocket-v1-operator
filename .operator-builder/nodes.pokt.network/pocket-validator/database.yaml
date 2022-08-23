@@ -1,0 +1,21 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: name-database  # +operator-builder:field:parent=metadata.name,replace="name",type=string
+  namespace: default # +operator-builder:collection:field:parent=metadata.name,type=string
+spec:
+  teamId: team-x  # +operator-builder:field:parent=metadata.name,type=string
+  volume:
+    size: 1Gi
+  numberOfInstances: 1  # +operator-builder:field:name=dbReplicas,type=int,default=1
+  users:
+    validator:  # database owner
+    - superuser
+    - createdb
+    #foo_user: []  # role for application foo
+  databases:
+    validatordb: validator  # dbname: owner
+  preparedDatabases:
+    bar: {}
+  postgresql:
+    version: "14"

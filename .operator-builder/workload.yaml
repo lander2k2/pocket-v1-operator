@@ -1,0 +1,21 @@
+kind: WorkloadCollection
+name: pocket-set
+spec:
+  api:
+    clusterScoped: true
+    domain: pokt.network
+    group: nodes
+    kind: PocketSet
+    version: v1alpha1
+  companionCliRootcmd:
+    description: Manage v1 pocket node deployments
+    name: pocketctl
+  companionCliSubcmd:
+    description: Manage sets of pocket nodes
+    name: set
+  componentFiles:
+    - nodes.pokt.network/pocket-validator/workload.yaml
+  resources:
+    - nodes.pokt.network/pocket-set/namespace.yaml
+    - nodes.pokt.network/pocket-set/service.yaml
+    - nodes.pokt.network/pocket-set/config.yaml

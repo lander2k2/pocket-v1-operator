@@ -1,0 +1,12 @@
+apiVersion: nodes.pokt.network/v1alpha1
+kind: PocketValidator
+metadata:
+  name: v1-validator2
+spec:
+  collection:
+    name: "primary"
+  validatorReplicas: 1
+  dbReplicas: 1
+  pocketImage: "poktnetwork/pocket-v1:main-dev"
+  privateKey: "2d00000000000000000000000000000000000000000000000000000000000000ee37d8c8e9cf42a34cfa75ff1141e2bc0ff2f37483f064dce47cb4d5e69db1d4"
+  peers: "v1-validator1:8222,v1-validator2:8222,v1-validator3:8222,v1-validator4:8222"

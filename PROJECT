@@ -1,0 +1,22 @@
+domain: pokt.network
+layout:
+- go.kubebuilder.io/v3
+multigroup: true
+plugins:
+  operatorBuilder:
+    cliRootCommandName: pocketctl
+    controllerImg: ""
+    workloadConfigPath: .operator-builder/workload.yaml
+projectName: pocket-v1-operator
+repo: github.com/lander2k2/pocket-v1-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: pokt.network
+  group: nodes
+  kind: PocketSet
+  path: github.com/lander2k2/pocket-v1-operator/apis/nodes/v1alpha1
+  version: v1alpha1
+version: "3"
