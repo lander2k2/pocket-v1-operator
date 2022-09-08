@@ -65,6 +65,7 @@ func CreateStatefulSetCollectionNameParentName(
 								"args": []interface{}{
 									"pocket",
 									"-config=/configs/config.json",
+									"-genesis=/genesis.json",
 								},
 								"ports": []interface{}{
 									map[string]interface{}{
@@ -199,46 +200,33 @@ func CreateConfigMapCollectionNameParentNameConfig(
 			},
 			"data": map[string]interface{}{
 				// controlled by field: privateKey
-				// controlled by field: peers
 				// controlled by field:
 				"config.json": `{
-  "root_dir": "/data",
-  "genesis_source": {
-    "file": {
-      "path": "/genesis.json"
-    }
-  },
-  "private_key": "` + parent.Spec.PrivateKey + `",
-  "enable_telemetry": true,
-  "p2p": {
-    "consensus_port": 8221,
-    "use_raintree": true,
-    "connection_type": "tcp",
-    "protocol": "tcp",
-    "address": "0.0.0.0:8222",
-    "peers": [ "` + parent.Spec.Peers + `" ]
+  "base": {
+    "root_directory": "/go/src/github.com/pocket-network",
+    "private_key": "` + parent.Spec.PrivateKey + `"
   },
   "consensus": {
     "max_mempool_bytes": 500000000,
-    "max_block_bytes": 4000000,
-    "pacemaker": {
+    "pacemaker_config": {
       "timeout_msec": 5000,
       "manual": true,
       "debug_time_between_steps_msec": 1000
     }
   },
-  "pre_persistence": {
-    "capacity": 99999,
-    "mempool_max_bytes": 99999,
-    "mempool_max_txs": 99999
-  },
+  "utility": {},
   "persistence": {
     "postgres_url": "postgres://validator:postgres@` + parent.Name + `-database:5432/validatordb",
-    "schema": "validator",
+    "node_schema": "validator",
     "block_store_path": "/blockstore"
   },
-  "utility": {},
+  "p2p": {
+    "consensus_port": 8080,
+    "use_rain_tree": true,
+    "connection_type": 1
+  },
   "telemetry": {
+    "enabled": true,
     "address": "0.0.0.0:9000",
     "endpoint": "/metrics"
   }

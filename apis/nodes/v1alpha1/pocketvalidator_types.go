@@ -56,8 +56,6 @@ type PocketValidatorSpec struct {
 	PocketImage string `json:"pocketImage,omitempty"`
 
 	PrivateKey string `json:"privateKey,omitempty"`
-
-	Peers string `json:"peers,omitempty"`
 }
 
 type PocketValidatorCollectionSpec struct {

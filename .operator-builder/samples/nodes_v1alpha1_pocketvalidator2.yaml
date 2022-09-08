@@ -7,6 +7,5 @@ spec:
     name: "primary"
   validatorReplicas: 1
   dbReplicas: 1
-  pocketImage: "poktnetwork/pocket-v1:main-dev"
-  privateKey: "2d00000000000000000000000000000000000000000000000000000000000000ee37d8c8e9cf42a34cfa75ff1141e2bc0ff2f37483f064dce47cb4d5e69db1d4"
-  peers: "v1-validator1:8222,v1-validator2:8222,v1-validator3:8222,v1-validator4:8222"
+  pocketImage: "poktnetwork/pocket-v1:sha-2cd775d-dev"
+  privateKey: "8a76f99e3bf132f1d61bb4a123f495e00c169ac7c55fa1a2aa1b34196020edb191dd4fd53e8e27020d62796fe68b469fad5fa5a7abc61d3eb2bd98ba16af1e29"

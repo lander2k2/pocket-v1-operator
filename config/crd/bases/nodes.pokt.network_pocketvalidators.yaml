@@ -58,8 +58,6 @@ spec:
                 default: 1
                 description: '(Default: 1)'
                 type: integer
-              peers:
-                type: string
               pocketImage:
                 type: string
               privateKey:

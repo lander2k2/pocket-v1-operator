@@ -7,13 +7,13 @@ MANIFEST=/tmp/validator.yaml
 PWD=$(kubectl get secret validator.${VALIDATOR}-database.credentials.postgresql.acid.zalan.do -ojson | jq -r '.data.password' | base64 -d)
 
 if [[ "$VALIDATOR" == "v1-validator1" ]]; then
-    PRIVATE_KEY="2e00000000000000000000000000000000000000000000000000000000000000264a0707979e0d6691f74b055429b5f318d39c2883bb509310b67424252e9ef2"
+    PRIVATE_KEY="ccec19df8fe866280e41da68d52d0ecdb07b01e85eeef45f400fd3a89b71c26a79254a4bc46bf1182826145b0b01b48bab4240cd30e23ba90e4e5e6b56961c6d"
 elif [[ "$VALIDATOR" == "v1-validator2" ]]; then
-    PRIVATE_KEY="2d00000000000000000000000000000000000000000000000000000000000000ee37d8c8e9cf42a34cfa75ff1141e2bc0ff2f37483f064dce47cb4d5e69db1d4"
+    PRIVATE_KEY="8a76f99e3bf132f1d61bb4a123f495e00c169ac7c55fa1a2aa1b34196020edb191dd4fd53e8e27020d62796fe68b469fad5fa5a7abc61d3eb2bd98ba16af1e29"
 elif [[ "$VALIDATOR" == "v1-validator3" ]]; then
-    PRIVATE_KEY="2b000000000000000000000000000000000000000000000000000000000000001ba66c6751506850ae0787244c69476b6d45fb857a914a5a0445a24253f7b810"
+    PRIVATE_KEY="c7bd1bd027e76b31534c3f5226c8e3c3f2a034ba9fa11017b65191f7f9ef0d253e5e4bbed5f98721163bb84445072a9202d213f1e348c5e9e0e2ea83bbb7e3aa"
 elif [[ "$VALIDATOR" == "v1-validator4" ]]; then
-    PRIVATE_KEY="2c00000000000000000000000000000000000000000000000000000000000000f868bcc508133899cc47b612e4f7d9d5dacc90ce1f28214a97b651baa00bf6e4"
+    PRIVATE_KEY="ddff03df6c525e551c5e9cd0e31ac4ec99dd6aa5d62185ba969bbf2e62db7e2c6c207cea1b1bf45dad8f8973d57291d3da31855254d7f1ed83ec3e06cabfe6b7"
 fi
 
 LAST_APPLIED=$(kubectl get cm ${VALIDATOR}-config -ojson | jq -r '.metadata.annotations."kubectl.kubernetes.io/last-applied-configuration"')
@@ -30,48 +30,31 @@ metadata:
 data:
   config.json: |
     {
-      "root_dir": "/data",
-      "genesis_source": {
-        "file": {
-          "path": "/genesis.json"
-        }
-      },
-      "private_key": "$PRIVATE_KEY",
-      "enable_telemetry": true,
-      "p2p": {
-        "consensus_port": 8221,
-        "use_raintree": true,
-        "connection_type": "tcp",
-        "protocol": "tcp",
-        "address": "0.0.0.0:8222",
-        "peers": [
-          "v1-validator1:8222",
-          "v1-validator2:8222",
-          "v1-validator3:8222",
-          "v1-validator4:8222"
-        ]
+      "base": {
+        "root_directory": "/go/src/github.com/pocket-network",
+        "private_key": "$PRIVATE_KEY"
       },
       "consensus": {
         "max_mempool_bytes": 500000000,
-        "max_block_bytes": 4000000,
-        "pacemaker": {
+        "pacemaker_config": {
           "timeout_msec": 5000,
           "manual": true,
           "debug_time_between_steps_msec": 1000
         }
       },
-      "pre_persistence": {
-        "capacity": 99999,
-        "mempool_max_bytes": 99999,
-        "mempool_max_txs": 99999
-      },
+      "utility": {},
       "persistence": {
         "postgres_url": "postgres://validator:$PWD@$VALIDATOR-database:5432/validatordb",
-        "schema": "validator",
+        "node_schema": "validator",
         "block_store_path": "/blockstore"
       },
-      "utility": {},
+      "p2p": {
+        "consensus_port": 8080,
+        "use_rain_tree": true,
+        "connection_type": 1
+      },
       "telemetry": {
+        "enabled": true,
         "address": "0.0.0.0:9000",
         "endpoint": "/metrics"
       }

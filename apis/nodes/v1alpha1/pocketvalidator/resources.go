@@ -40,7 +40,6 @@ spec:
   validatorReplicas: 1
   pocketImage: "poktnetwork/pocket-v1:main-dev"
   privateKey: "privatekey"
-  peers: "nodePeers"
 `
 
 // samplePocketValidatorRequired is a sample containing only required fields
@@ -54,7 +53,6 @@ spec:
     #namespace: ""
   pocketImage: "poktnetwork/pocket-v1:main-dev"
   privateKey: "privatekey"
-  peers: "nodePeers"
 `
 
 // Sample returns the sample manifest for this custom resource.
