@@ -49,7 +49,8 @@ for more info on using the dev client.
 kubectl exec -it pocket-v1-client -- go run app/client/main.go
 ```
 
-Finally, once testing is complete you can clean up.
+Finally, once testing is complete you can clean up.  Note: you will need to run
+the controller to finalize resource deletion with `make run` if you stopped it.
 
 ```bash
 make uninstall
